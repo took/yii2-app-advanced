@@ -1,0 +1,36 @@
+services:
+
+  app-dev:
+    build: dev
+    ports:
+      - 20080:80
+      - 20081:8081
+      - 20082:8082
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/app
+    environment:
+      - YII_ENV=dev
+      - YII_DEBUG=true
+      - DB_NAME=yii2advanced_dev
+    depends_on:
+      - mysql-yii2advanced-dev
+    networks:
+      - yii2-dev-network
+
+  mysql-yii2advanced-dev:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=verysecret
+      - MYSQL_DATABASE=yii2advanced
+      - MYSQL_USER=yii2advanced
+      - MYSQL_PASSWORD=secret
+
+  #pgsql:
+  #  image: postgres:9.5
+  #  environment:
+  #    - POSTGRES_DB=yii2advanced
+  #    - POSTGRES_USER=yii2advanced
+  #    - POSTGRES_PASSWORD=secret

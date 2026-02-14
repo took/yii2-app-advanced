@@ -7,8 +7,8 @@
 
 ### Additional info
 
-| Q                | A
-| ---------------- | ---
+| Q                 | A
+|-------------------| ---
 | Yii version       |
-| PHP version      |
-| Operating system |
+| PHP version       |
+| Operating system  |

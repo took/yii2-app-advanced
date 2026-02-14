@@ -1,6 +1,7 @@
 # yii console commands
 /yii
 /yii_test
+/yii.bat
 /yii_test.bat
 
 # phpstorm project files
@@ -26,8 +27,9 @@ Thumbs.db
 # composer itself is not needed
 composer.phar
 
-# Mac DS_Store Files
+# OS specific
 .DS_Store
+.directory
 
 # phpunit itself is not needed
 phpunit.phar
@@ -38,9 +40,16 @@ phpunit.phar
 /.vagrant
 
 # ignore generated files
-/frontend/web/index.php
-/frontend/web/index-test.php
-/frontend/web/robots.txt
-/backend/web/index.php
-/backend/web/index-test.php
-/backend/web/robots.txt
+/frontpage/web/index.php
+/frontpage/web/index-test.php
+/frontpage/web/robots.txt
+/backoffice/web/index.php
+/backoffice/web/index-test.php
+/backoffice/web/robots.txt
+/api/web/index.php
+/api/web/index-test.php
+/api/web/robots.txt
+
+# Backup files
+*.bak
+*~

@@ -34,7 +34,7 @@ frontend
 ```php
 'components' => [
     'request' => [
-        'csrfParam' => '_csrf-backend',
+        'csrfParam' => '_csrf-backoffice',
         'csrfCookie' => [
             'httpOnly' => true,
             'path' => '/admin',
@@ -44,14 +44,14 @@ frontend
         'identityClass' => 'common\models\User',
         'enableAutoLogin' => true,
         'identityCookie' => [
-            'name' => '_identity-backend',
+            'name' => '_identity-backoffice',
             'path' => '/admin',
             'httpOnly' => true,
         ],
     ],
     'session' => [
         // これがバックエンドへのログインに使用されるセッション・クッキーの名前
-        'name' => 'advanced-backend',
+        'name' => 'advanced-backoffice',
         'cookieParams' => [
             'path' => '/admin',
         ],

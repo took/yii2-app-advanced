@@ -8,12 +8,12 @@ contain its own URL manager rules you need to duplicate that for the backend app
 return [
     'components' => [
         'urlManager' => [
-            // here is your normal backend url manager config
+            // here is your normal backoffice url manager config
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named url managers!
             'hostInfo' => 'https://example.com',    // the full base domain name to use for the links
-            // here is your frontend URL manager config
+            // here is your frontpage URL manager config
         ],
 
     ],
@@ -29,12 +29,12 @@ You may need to generate links to the frontend or any another app (ie: [topic-ad
 return [
     'components' => [
         'urlManager' => [
-            // here is your normal backend URL manager config
+            // here is your normal backoffice URL manager config
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named URL managers!
             'hostInfo' => 'https://example.com',    // the full base domain name to use for the links
-            // here is your frontend URL manager config
+            // here is your frontpage URL manager config
         ],
         'urlManagerBlog' => [
             'class' => 'yii\web\UrlManager',            // class is required on custom named URL managers!
@@ -83,17 +83,17 @@ return [
     // ...
     'components' => [
         'urlManager' => [
-            // backend URL manager
+            // backoffice URL manager
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/backend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/backoffice-rules.php'),
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named url managers!
             'hostInfo' => 'https://example.com',    // the full base domain name to use for the links
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/frontend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/frontpage-rules.php'),
         ],
         // ...
 
@@ -193,7 +193,7 @@ Add the following in `common/config/bootstrap.php`:
 
 ```php
 Yii::setAlias('@frontendDomain', getDomain());              // ex: https://somedomain.tld
-Yii::setAlias('@backendDomain', getDomain('backend'));      // ex: https://backend.somedomain.tld
+Yii::setAlias('@backendDomain', getDomain('backoffice'));      // ex: https://backend.somedomain.tld
 ```
 
 Remember `www` is a sub-domain, so pass it like one if you use it like so: `getDomain('www')`
@@ -205,17 +205,17 @@ return [
     // ...
     'components' => [
         'urlManager' => [
-            // backend URL manager
+            // backoffice URL manager
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/backend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/backoffice-rules.php'),
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named URL managers!
             'hostInfo' => Yii::getAlias('@frontendDomain'),    // the full base domain name to use for the links
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/frontend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/frontpage-rules.php'),
         ],
         // ...
 

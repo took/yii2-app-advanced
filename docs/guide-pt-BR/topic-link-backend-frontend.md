@@ -9,10 +9,10 @@ de backend e criar um componente de gerenciador de URL com um nome diferente:
 return [
     'components' => [
         'urlManager' => [
-            // configurações normais do gerenciador de URL do backend
+            // configurações normais do gerenciador de URL do backoffice
         ],
         'urlManagerFrontend' => [
-            // regras do gerenciador de URL provindas do frontend
+            // regras do gerenciador de URL provindas do frontpage
         ],
 
     ],

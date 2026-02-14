@@ -36,7 +36,7 @@ aplikacji back-end w pliku `backend/config/main.php` następująco:
 ```php
 'components' => [
     'request' => [
-        'csrfParam' => '_csrf-backend',
+        'csrfParam' => '_csrf-backoffice',
         'csrfCookie' => [
             'httpOnly' => true,
             'path' => '/admin',
@@ -46,14 +46,14 @@ aplikacji back-end w pliku `backend/config/main.php` następująco:
         'identityClass' => 'common\models\User',
         'enableAutoLogin' => true,
         'identityCookie' => [
-            'name' => '_identity-backend',
+            'name' => '_identity-backoffice',
             'path' => '/admin',
             'httpOnly' => true,
         ],
     ],
     'session' => [
         // to jest nazwa ciasteczka sesji używanego do logowania się na back-endzie
-        'name' => 'advanced-backend',
+        'name' => 'advanced-backoffice',
         'cookieParams' => [
             'path' => '/admin',
         ],

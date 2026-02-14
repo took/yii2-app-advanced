@@ -86,14 +86,14 @@ return [
             // バックエンドの URL マネージャ
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/backend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/backoffice-rules.php'),
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // 名前を変えた URL マネージャはクラスの指定が必要 !
             'hostInfo' => 'https://example.com',    // リンクに使用するフル・ベース・ドメイン名
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/frontend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/frontpage-rules.php'),
         ],
         // ...
 
@@ -193,7 +193,7 @@ define('DOMAIN_NAME', 'example.com');
 
 ```php
 Yii::setAlias('@frontendDomain', getDomain());              // ex: https://somedomain.tld
-Yii::setAlias('@backendDomain', getDomain('backend'));      // ex: https://backend.somedomain.tld
+Yii::setAlias('@backendDomain', getDomain('backoffice'));      // ex: https://backend.somedomain.tld
 ```
 
 `www` がサブ・ドメインであることを思い出して下さい。ですから `www` を使う場合はそれを渡します。すなわち: `getDomain('www')`
@@ -205,17 +205,17 @@ return [
     // ...
     'components' => [
         'urlManager' => [
-            // backend URL manager
+            // backoffice URL manager
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/backend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/backoffice-rules.php'),
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // 名前を変えた URL マネージャはクラスの指定が必要 !
             'hostInfo' => Yii::getAlias('@frontendDomain'),    // リンクに使用するフル・ベース・ドメイン名
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/frontend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/frontpage-rules.php'),
         ],
         // ...
 

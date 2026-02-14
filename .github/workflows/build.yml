@@ -20,12 +20,10 @@ jobs:
           - ubuntu-latest
 
         php:
-          - "7.4"
-          - "8.0"
-          - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
+          - "8.5"
 
         mysql:
           - "5.7"
@@ -89,8 +87,8 @@ jobs:
           sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2advanced_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" common/config/test-local.php
           sed -i "/'db'/a 'username' => 'root'," common/config/test-local.php
           sed -i "/'db'/a 'password' => 'root'," common/config/test-local.php
-          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" frontend/config/main.php
-          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" backend/config/main.php
+          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" frontpage/config/main.php
+          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" backoffice/config/main.php
 
       - name: Apply migration
         run: php yii_test migrate --interactive=0

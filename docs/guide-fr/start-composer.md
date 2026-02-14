@@ -41,8 +41,8 @@ Après avoir installé le modèle de projet, il est conseillé d'ajuster le cont
     "autoload-dev": {
         "psr-4": {
             "common\\tests\\": ["common/tests/", "common/tests/_support"],
-            "backend\\tests\\": ["backend/tests/", "backend/tests/_support"],
-            "frontend\\tests\\": ["frontend/tests/", "frontend/tests/_support"]
+            "backend\\tests\\": ["backoffice/tests/", "backoffice/tests/_support"],
+            "frontend\\tests\\": ["frontpage/tests/", "frontpage/tests/_support"]
         }
     },
     "config": {
