@@ -1,7 +1,8 @@
 Creating links from backend to frontend
 =======================================
 
-Often it's required to create links from the backend application to the frontend application. Since the frontend application may
+Often it's required to create links from the backend application to the frontend application. Since the frontend
+application may
 contain its own URL manager rules you need to duplicate that for the backend application by naming it differently:
 
 ```php
@@ -20,10 +21,13 @@ return [
 ];
 ```
 
-The URL Manager doesn't magically know the root URL of another app on another sub-domain. This is where the `hostInfo` param
+The URL Manager doesn't magically know the root URL of another app on another sub-domain. This is where the `hostInfo`
+param
 comes in. It defines the full domain for the URL manager to generate absolute links with.
 
-You may need to generate links to the frontend or any another app (ie: [topic-adding-more-apps.md](topic-adding-more-apps.md)). You can have multiple URL managers for multiple apps on multiple sub-domains.
+You may need to generate links to the frontend or any another app (
+ie: [topic-adding-more-apps.md](topic-adding-more-apps.md)). You can have multiple URL managers for multiple apps on
+multiple sub-domains.
 
 ```php
 return [
@@ -104,11 +108,14 @@ return [
 
 ## Hardcoded hostInfo URL
 
-The examples above are to illustrate what is expected in the field. `hostInfo` expects a full domain name like `https://example.com` or
-`https://backend.example.com`. Having a hard-coded domain in your config isn't very practical. Especially for handling multiple environments
+The examples above are to illustrate what is expected in the field. `hostInfo` expects a full domain name like
+`https://example.com` or
+`https://backend.example.com`. Having a hard-coded domain in your config isn't very practical. Especially for handling
+multiple environments
 (local, staging, production, etc).
 
-There are a few ways you can do this. The following way allows you to make use of Yii's environments and the `init` process.
+There are a few ways you can do this. The following way allows you to make use of Yii's environments and the `init`
+process.
 
 We first need to load functions early on during Composer's autoload.
 
@@ -116,9 +123,9 @@ In your `composer.json` file, add the following:
 
 ```json
 "autoload": {
-    "files": [
-        "common/functions.php"
-    ]
+"files": [
+"common/functions.php"
+]
 }
 ```
 
@@ -144,7 +151,8 @@ function getDomain($subDomain = null)
 }
 ```
 
-Now we need to define our constants in the corresponding `web/index.php` files. Here are the paths for the default environments.
+Now we need to define our constants in the corresponding `web/index.php` files. Here are the paths for the default
+environments.
 
 ```
 environments/dev/backend/web/index.php
@@ -153,7 +161,8 @@ environments/prod/backend/web/index.php
 environments/prod/frontend/web/index.php
 ```
 
-In the `dev` copies, we will use our local development domain name (ie: mylocalsite.test) and in the `prod` copies we will use the real domain (ie: example.com).
+In the `dev` copies, we will use our local development domain name (ie: mylocalsite.test) and in the `prod` copies we
+will use the real domain (ie: example.com).
 
 Add to the top of the index files:
 

@@ -11,7 +11,7 @@ Alias de chemin pré-définis
 - `@vendor` - dossier Composer des vendeurs.
 - `@bower` - dossier des vendeurs qui contient les [paquets bower](https://bower.io/).
 - `@npm` - dossier des vendeurs qui contient les [paquets npm](https://www.npmjs.org/).
-- `@web` -  URL de base de l'application en exécution.
+- `@web` - URL de base de l'application en exécution.
 - `@webroot` - dossier racine Web du l'application en cours d'exécution.
 
 Les alias spécifiques à la structure de dossiers de l'application avancée

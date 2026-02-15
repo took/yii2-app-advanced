@@ -7,7 +7,9 @@ El requerimiento mínimo para esta plantilla es que su servidor web soporte PHP 
 
 ## Instalación usando Composer
 
-Si no tienes [Composer](https://getcomposer.org/), sigue las instrucciones en la sección [Instalando Yii](https://github.com/yiisoft/yii2/blob/master/docs/guide-es/start-installation.md#installing-via-composer) de la guía definitiva para instalarlo.
+Si no tienes [Composer](https://getcomposer.org/), sigue las instrucciones en la
+sección [Instalando Yii](https://github.com/yiisoft/yii2/blob/master/docs/guide-es/start-installation.md#installing-via-composer)
+de la guía definitiva para instalarlo.
 
 Con Composer instalado, puedes entonces instalar la aplicación usando los siguientes comandos:
 
@@ -18,14 +20,15 @@ Puedes elegir un nombre de directorio diferente si tu quieres.
 
 ## Instalación desde un Archivo
 
-Extrae el archivo descargado desde [yiiframework.com](https://www.yiiframework.com/download/) a directorio nombrado `advanced` que está directamente bajo el Web root.
+Extrae el archivo descargado desde [yiiframework.com](https://www.yiiframework.com/download/) a directorio nombrado
+`advanced` que está directamente bajo el Web root.
 
 A continuación sigue las siguientes instrucciones dadas en la siguiente sub-sección.
 
-
 ## Preparando la aplicación
 
-Después de instalar la aplicación, tienes que realizar los siguientes pasos para la instalación de la aplicación. Solo necesitas hacer esto la primera vez.
+Después de instalar la aplicación, tienes que realizar los siguientes pasos para la instalación de la aplicación. Solo
+necesitas hacer esto la primera vez.
 
 1. Ejecuta el comando `init` y selecciona `dev` como entorno.
 
@@ -39,14 +42,15 @@ Después de instalar la aplicación, tienes que realizar los siguientes pasos pa
    php /path/to/yii-application/init --env=Production --overwrite=All --delete=All
    ```
 
-2. Crea una nueva base de datos y ajusta la configuración de `components['db']` en `common/config/main-local.php` como corresponde.
+2. Crea una nueva base de datos y ajusta la configuración de `components['db']` en `common/config/main-local.php` como
+   corresponde.
 
 3. Aplica las migraciones con el comando de consola `yii migrate`.
 
 4. Establece los documentos raíces(document-root) de tu servidor web:
 
-   - para frontend `/path/to/yii-application/frontend/web/` y usando la URL `http://frontend.test/`
-   - para backend `/path/to/yii-application/backend/web/` y usando la URL `http://backend.test/`
+    - para frontend `/path/to/yii-application/frontend/web/` y usando la URL `http://frontend.test/`
+    - para backend `/path/to/yii-application/backend/web/` y usando la URL `http://backend.test/`
 
    Para Apache podría ser lo siguiente:
 
@@ -174,8 +178,8 @@ Después de instalar la aplicación, tienes que realizar los siguientes pasos pa
 
 5. Cambia los ficheros hosts que apuntan al dominio de tu servidor.
 
-   - Windows: `c:\Windows\System32\Drivers\etc\hosts`
-   - Linux: `/etc/hosts`
+    - Windows: `c:\Windows\System32\Drivers\etc\hosts`
+    - Linux: `/etc/hosts`
 
    Añade las siguientes lineas:
 
@@ -184,5 +188,7 @@ Después de instalar la aplicación, tienes que realizar los siguientes pasos pa
    127.0.0.1   backend.test
    ```
 
-Para loguearte dentro de la aplicación, necesitas primero registrarte, con cualquiera de sus correos electrónicos, nombre de usuario y contraseña.
-A continuación puedes loguearte dentro de la aplicación con el mismo correo electrónico y la contraseña en cualquier momento.
+Para loguearte dentro de la aplicación, necesitas primero registrarte, con cualquiera de sus correos electrónicos,
+nombre de usuario y contraseña.
+A continuación puedes loguearte dentro de la aplicación con el mismo correo electrónico y la contraseña en cualquier
+momento.

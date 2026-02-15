@@ -14,5 +14,5 @@ Predefiniowane aliasy
 - `@web` - bazowy adres URL aktualnie uruchomionej aplikacji.
 - `@webroot` - główny folder web aktualnie uruchomionej aplikacji.
 
-Aliasy odpowiadające strukturze folderów zaawansowanej aplikacji (`@common`,  `@frontend`, `@backend` i `@console`) są 
+Aliasy odpowiadające strukturze folderów zaawansowanej aplikacji (`@common`,  `@frontend`, `@backend` i `@console`) są
 zdefiniowane w pliku `common/config/bootstrap.php`.

@@ -29,9 +29,9 @@ class SignupCest
         $I->submitForm(
             $this->formId,
             [
-                'SignupForm[username]'  => 'tester',
-                'SignupForm[email]'     => 'ttttt',
-                'SignupForm[password]'  => 'tester_password',
+                'SignupForm[username]' => 'tester',
+                'SignupForm[email]' => 'ttttt',
+                'SignupForm[password]' => 'tester_password',
             ]
         );
         $I->dontSee('Username cannot be blank.', '.invalid-feedback');

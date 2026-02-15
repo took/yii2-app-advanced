@@ -1,7 +1,7 @@
 Tworzenie linków pomiędzy back-endem i front-endem
 ==================================================
 
-Często spotykanym wymaganiem jest utworzenie linków pomiędzy aplikacją back-endową a front-endową. Ponieważ front-end 
+Często spotykanym wymaganiem jest utworzenie linków pomiędzy aplikacją back-endową a front-endową. Ponieważ front-end
 może posiadać oddzielny komponent menadżera adresów URL, musisz skopiować jego ustawienia (pod inną nazwą):
 
 ```php

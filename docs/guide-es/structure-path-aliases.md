@@ -14,4 +14,5 @@ Alias Predefinidos
 - `@web` - URL base de la actual aplicación web que se está ejecutando.
 - `@webroot` - directorio raíz de la aplicación web que se está ejecutando actualmente.
 
-Los alias específicos de la estructura de directorios de la aplicación avanzada (`@common`,  `@frontend`, `@backend`, and `@console`) están definidos en `common/config/bootstrap.php`.
+Los alias específicos de la estructura de directorios de la aplicación avanzada (`@common`,  `@frontend`, `@backend`,
+and `@console`) están definidos en `common/config/bootstrap.php`.

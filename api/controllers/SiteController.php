@@ -2,7 +2,6 @@
 
 namespace api\controllers;
 
-use Yii;
 use yii\filters\ContentNegotiator;
 use yii\filters\Cors;
 use yii\web\Controller;
@@ -52,7 +51,7 @@ class SiteController extends Controller
 
     /**
      * Returns API information and status.
-     * 
+     *
      * @return array API response with status and information
      */
     public function actionIndex(): array

@@ -13,9 +13,9 @@ class ResendVerificationEmailCest
     /**
      * Load fixtures before db transaction begin
      * Called in _before()
-     * @see \Codeception\Module\Yii2::_before()
-     * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
+     * @see \Codeception\Module\Yii2::loadFixtures()
+     * @see \Codeception\Module\Yii2::_before()
      */
     public function _fixtures()
     {
@@ -32,13 +32,6 @@ class ResendVerificationEmailCest
         $I->amOnRoute('/site/resend-verification-email');
     }
 
-    protected function formParams($email)
-    {
-        return [
-            'ResendVerificationEmailForm[email]' => $email
-        ];
-    }
-
     public function checkPage(FunctionalTester $I)
     {
         $I->see('Resend verification email', 'h1');
@@ -49,6 +42,13 @@ class ResendVerificationEmailCest
     {
         $I->submitForm($this->formId, $this->formParams(''));
         $I->seeValidationError('Email cannot be blank.');
+    }
+
+    protected function formParams($email)
+    {
+        return [
+            'ResendVerificationEmailForm[email]' => $email
+        ];
     }
 
     public function checkWrongEmailFormat(FunctionalTester $I)

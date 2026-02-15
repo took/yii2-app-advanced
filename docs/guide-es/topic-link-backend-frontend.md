@@ -1,7 +1,8 @@
 Creando enlaces desde el backend al fronted
 ===========================================
 
-Frecuentemente se necesita crear enlaces de la aplicación backend a la aplicación frontend. Dado que la aplicación frontend puede contener sus propias
+Frecuentemente se necesita crear enlaces de la aplicación backend a la aplicación frontend. Dado que la aplicación
+frontend puede contener sus propias
 reglas del gestor de URL puedes necesitar duplicarlo para la aplicación backend nombrandolo diferente:
 
 ```php

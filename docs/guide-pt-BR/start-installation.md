@@ -7,27 +7,27 @@ O requisito mínimo deste template de projetos é que seu servidor Web suporte P
 
 ## Instalação utilizando Composer
 
-Caso você não tenha o [Composer](https://getcomposer.org/) instalado, siga as instruções na seção [Instalando o Yii](https://github.com/yiisoft/yii2/blob/master/docs/guide-pt-BR/start-installation.md#instalando-via-composer-)
+Caso você não tenha o [Composer](https://getcomposer.org/) instalado, siga as instruções na
+seção [Instalando o Yii](https://github.com/yiisoft/yii2/blob/master/docs/guide-pt-BR/start-installation.md#instalando-via-composer-)
 do guia definitivo para Yii 2.0 para instala-lo.
 
 Com o Composer instalado, você pode então instalar o template de projetos usando os seguintes comandos:
 
     composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application
-    
+
 O comando instala o template avançado de projetos no diretório `yii-application`.
 Você pode escolher um diretório diferente se desejar.
 
 ## Instalação a partir de um arquivo
 
-Descompacte o arquivo baixado de [yiiframework.com](https://www.yiiframework.com/download/) para 
+Descompacte o arquivo baixado de [yiiframework.com](https://www.yiiframework.com/download/) para
 um diretório com nome de `advanced` no diretório raiz do servidor Web.
 
 Então siga as instruções presentes na próxima subseção.
 
-
 ## Preparando a aplicação
 
-Após instalar o template avançado de projetos, você deve seguir os seguintes passos 
+Após instalar o template avançado de projetos, você deve seguir os seguintes passos
 para inicializar a aplicação, sendo necessário realizá-los apenas uma vez no momento da instalação.
 
 1. Abra um terminal de console, execute comando `init` e selecione a opção `dev`.
@@ -35,23 +35,25 @@ para inicializar a aplicação, sendo necessário realizá-los apenas uma vez no
    ```
    /caminho/para/binario-php/php /caminho/para/aplicacao-yii/init
    ```
-   
-   Caso queria realizar a automação do processo por meio de um script, você pode executar o comando `init` em modo não interativo.
-   
+
+   Caso queria realizar a automação do processo por meio de um script, você pode executar o comando `init` em modo não
+   interativo.
+
    ```
    /caminho/para/binario-php/php /caminho/para/aplicacao-yii/init --env=Production --overwrite=All --delete=All
    ```
-   
-2. Crie um novo banco de dados e ajuste a configuração `components['db']` em `common/config/main-local.php` adequadamente.
 
-3. Abra um terminal de console e aplique as migrações de dados utilizando o comando `/caminho/para/binario-php/php /caminho/para/aplicacao-yii/yii migrate`.
+2. Crie um novo banco de dados e ajuste a configuração `components['db']` em `common/config/main-local.php`
+   adequadamente.
+
+3. Abra um terminal de console e aplique as migrações de dados utilizando o comando
+   `/caminho/para/binario-php/php /caminho/para/aplicacao-yii/yii migrate`.
 
 4. Configure a raiz dos documentos do seu servidor Web:
-    
+
     - para o frontend `/caminho/para/aplicacao-yii/frontend/web/` usando URL `http://frontend.test/`
     - para o backend `/caminho/para/aplicacao-yii/backend/web/` usando URL `http://backend.test/`
-    
-    
+
     Exemplo de configuração para servidores Apache
     
     ```apache
@@ -175,30 +177,35 @@ para inicializar a aplicação, sendo necessário realizá-los apenas uma vez no
                }
            }
     ```
-    
+
 5. Altere o arquivo de hosts para apontar o domínio do seu servidor.
 
-   - Windows: `c:\Windows\System32\Drivers\etc\hosts`
-   - Linux: `/etc/hosts`
-   
+    - Windows: `c:\Windows\System32\Drivers\etc\hosts`
+    - Linux: `/etc/hosts`
+
    Adicione as seguintes linhas:
-   
+
    ```
    127.0.0.1   frontend.test
    127.0.0.1   backend.test
    ```
-   
-Para se autenticar na aplicação é necessário que primeiro, você se registre com qualquer um dos seus endereços de e-mail, usuário e senha.
+
+Para se autenticar na aplicação é necessário que primeiro, você se registre com qualquer um dos seus endereços de
+e-mail, usuário e senha.
 Então, você pode se autenticar na aplicação com o mesmo endereço de e-mail e senha a qualquer momento.
 
-> PS: caso queira que o template avançado de projetos utilize um único domínio, sendo `/` o frontend e `/admin` o backend, 
-> consulte as [configurações e documentações por Oleg Belostotskiy](https://github.com/mickgeek/yii2-advanced-one-domain-config) (apenas inglês).
+> PS: caso queira que o template avançado de projetos utilize um único domínio, sendo `/` o frontend e `/admin` o
+> backend,
+> consulte
+> as [configurações e documentações por Oleg Belostotskiy](https://github.com/mickgeek/yii2-advanced-one-domain-config) (
+> apenas inglês).
 
 ## Instalação utilizando Vagrant
 
 Esta é a forma mais simples porém, mais demorada (~20 min).
 
-**Esta forma de instalação não necessita de nenhum software pré-instalado (web-server, PHP, MySQL, etc.)** - basta apenas seguir as etapas!
+**Esta forma de instalação não necessita de nenhum software pré-instalado (web-server, PHP, MySQL, etc.)** - basta
+apenas seguir as etapas!
 
 #### Manual para usuários Linux/Unix
 
@@ -206,13 +213,13 @@ Esta é a forma mais simples porém, mais demorada (~20 min).
 2. Instale o [Vagrant](https://www.vagrantup.com/downloads.html)
 3. Crie um [token de API pessoal](https://github.com/blog/1509-personal-api-tokens) do GitHub
 4. Prepare o projeto:
-   
+
    ```bash
    git clone https://github.com/yiisoft/yii2-app-advanced.git
    cd yii2-app-advanced/vagrant/config
    cp vagrant-local.example.yml vagrant-local.yml
    ```
-   
+
 4. Introduza seu token de API pessoal no arquivo `vagrant-local.yml`
 5. Entre no diretório raiz do projeto:
 
@@ -226,8 +233,9 @@ Esta é a forma mais simples porém, mais demorada (~20 min).
    vagrant plugin install vagrant-hostmanager
    vagrant up
    ```
-   
+
 Isso é tudo. Basta aguardar a conclusão! Após isso você pode acessar o projeto localmente pelas URLs:
+
 * frontend: http://y2aa-frontend.test
 * backend: http://y2aa-backend.test
 
@@ -238,29 +246,32 @@ Isso é tudo. Basta aguardar a conclusão! Após isso você pode acessar o proje
 3. Reinicie
 4. Crie um [token de API pessoal](https://github.com/blog/1509-personal-api-tokens) do GitHub
 5. Prepare o projeto:
-   * faça do download do repositório [yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced/archive/master.zip)
-   * descompacte o arquivo
-   * entre no diretório `yii2-app-advanced-master/vagrant/config`
-   * copie o arquivo `vagrant-local.example.yml` para `vagrant-local.yml`
-   
+    * faça do download do
+      repositório [yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced/archive/master.zip)
+    * descompacte o arquivo
+    * entre no diretório `yii2-app-advanced-master/vagrant/config`
+    * copie o arquivo `vagrant-local.example.yml` para `vagrant-local.yml`
+
 6. Introduza seu token de API pessoal no arquivo `vagrant-local.yml`
 7. Adicione as seguintes linhas no [arquivo de hosts](https://pt.wikipedia.org/wiki/Hosts_(arquivo)):
-   
+
    ```
    192.168.83.137 y2aa-frontend.test
    192.168.83.137 y2aa-backend.test
    ```
-   
+
 8. Abra o terminal (`cmd.exe`), **entre no diretório raiz do projeto** e execute os comandos:
 
    ```bash
    vagrant plugin install vagrant-hostmanager
    vagrant up
    ```
-   
-   (Você pode ler [aqui](https://pt.wikihow.com/Alterar-Diret%C3%B3rios-no-Prompt-de-Comandos) como alterar diretórios no prompt de comando) 
+
+   (Você pode ler [aqui](https://pt.wikihow.com/Alterar-Diret%C3%B3rios-no-Prompt-de-Comandos) como alterar diretórios
+   no prompt de comando)
 
 Isso é tudo. Basta aguardar a conclusão! Após isso você pode acessar o projeto localmente pelas URLs:
+
 * frontend: http://y2aa-frontend.test
 * backend: http://y2aa-backend.test
 

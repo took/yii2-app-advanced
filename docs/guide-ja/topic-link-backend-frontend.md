@@ -20,10 +20,13 @@ return [
 ];
 ```
 
-URL マネージャは別のサブ・ドメインにある別のアプリのルート URL を魔法によって知ることは出来ません。そこで `hostinfo` パラメータの出番となります。
+URL マネージャは別のサブ・ドメインにある別のアプリのルート URL を魔法によって知ることは出来ません。そこで `hostinfo`
+パラメータの出番となります。
 これが定義するフル・ドメイン名によって URL マネージャが絶対リンクを作成します。
 
-フロントエンドだけでなく他のアプリ ([アプリケーションをさらに追加する](topic-adding-more-apps.md)) へのリンクを生成する必要があることもあるでしょう。複数のサブ・ドメイン上の複数のアプリに対応するために複数の URL マネージャを定義することが出来ます。
+フロントエンドだけでなく他のアプリ ([アプリケーションをさらに追加する](topic-adding-more-apps.md))
+へのリンクを生成する必要があることもあるでしょう。複数のサブ・ドメイン上の複数のアプリに対応するために複数の URL
+マネージャを定義することが出来ます。
 
 ```php
 return [
@@ -104,7 +107,8 @@ return [
 
 ## ハードコードされた hostInfo URL
 
-上記の例はフィールドに何を入れるべきかを示すためのものです。`hostInfo` には `https://example.com` または `https://backend.example.com` のようなフル・ドメイン名を入れなければなりません。
+上記の例はフィールドに何を入れるべきかを示すためのものです。`hostInfo` には `https://example.com` または
+`https://backend.example.com` のようなフル・ドメイン名を入れなければなりません。
 構成ファイルにハードコードされたドメインを記載するのはあまり実用的ではありません。
 特に複数の環境 (ローカルの開発環境、ステージング、実運用環境) を持つ場合は不便です。
 
@@ -116,9 +120,9 @@ return [
 
 ```json
 "autoload": {
-    "files": [
-        "common/functions.php"
-    ]
+"files": [
+"common/functions.php"
+]
 }
 ```
 
@@ -144,7 +148,8 @@ function getDomain($subDomain = null)
 }
 ```
 
-そして、対応する `web/index.php` ファイルで定数を定義する必要があります。下記はデフォルトの諸環境のための `web/index.php` ファイルのパスです。
+そして、対応する `web/index.php` ファイルで定数を定義する必要があります。下記はデフォルトの諸環境のための `web/index.php`
+ファイルのパスです。
 
 ```
 environments/dev/backend/web/index.php
@@ -153,7 +158,8 @@ environments/prod/backend/web/index.php
 environments/prod/frontend/web/index.php
 ```
 
-`dev` 版では、ロカール開発環境のドメイン名 (例: mylocalsite.test) を使い、`prod` 版では実際のドメイン名 (例: example.com) を使うことになります。
+`dev` 版では、ロカール開発環境のドメイン名 (例: mylocalsite.test) を使い、`prod` 版では実際のドメイン名 (例: example.com)
+を使うことになります。
 
 index ファイルの先頭に追加します。
 
@@ -196,7 +202,8 @@ Yii::setAlias('@frontendDomain', getDomain());              // ex: https://somed
 Yii::setAlias('@backendDomain', getDomain('backoffice'));      // ex: https://backend.somedomain.tld
 ```
 
-`www` がサブ・ドメインであることを思い出して下さい。ですから `www` を使う場合はそれを渡します。すなわち: `getDomain('www')`
+`www` がサブ・ドメインであることを思い出して下さい。ですから `www` を使う場合はそれを渡します。すなわち:
+`getDomain('www')`
 
 以上の設定が全て終れば、最後にメインの構成ファイルでエイリアスを使用するだけです。
 

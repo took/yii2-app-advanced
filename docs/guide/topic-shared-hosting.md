@@ -27,8 +27,10 @@ into `www/admin`. In each case you will need to adjust the paths in `index.php` 
 
 ### Adjust sessions and cookies
 
-Originally the backend and frontend are intended to run at different domains. When we’re moving it all to the same domain
-the frontend and backend will be sharing the same cookies, creating a clash. In order to fix it, adjust backend application config
+Originally the backend and frontend are intended to run at different domains. When we’re moving it all to the same
+domain
+the frontend and backend will be sharing the same cookies, creating a clash. In order to fix it, adjust backend
+application config
 `backend/config/main.php` as follows:
 
 ```php

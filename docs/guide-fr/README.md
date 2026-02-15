@@ -1,13 +1,17 @@
 Yii 2 Modèle de projet avancé
 ===============================
 
-Le modèle de projet avancé de Yii 2 est le squelette d'application  [Yii 2](https://www.yiiframework.com/) le plus adapté au développement d'applications Web impliquant de multiples parties.
+Le modèle de projet avancé de Yii 2 est le squelette d'application  [Yii 2](https://www.yiiframework.com/) le plus
+adapté au développement d'applications Web impliquant de multiples parties.
 
-Ce modèle inclut trois parties : l'interface utilisateur (frontend), l'interface d'administration (backend) et la console, qui constituent chacune une application Yii séparée.
+Ce modèle inclut trois parties : l'interface utilisateur (frontend), l'interface d'administration (backend) et la
+console, qui constituent chacune une application Yii séparée.
 
-Ce modèle est conçu pour être utilisé dans un environnement d'équipe de développement. Il prend en charge le déploiement de l'application dans des environnements différents.
+Ce modèle est conçu pour être utilisé dans un environnement d'équipe de développement. Il prend en charge le déploiement
+de l'application dans des environnements différents.
 
-Il va aussi un peu plus loin en ce qui concerne les fonctionnalités et fournit les éléments essentiels que sont la base de données, l'enregistrement et la récupération du mot de passe directement après l'installation initiale.
+Il va aussi un peu plus loin en ce qui concerne les fonctionnalités et fournit les éléments essentiels que sont la base
+de données, l'enregistrement et la récupération du mot de passe directement après l'installation initiale.
 
 
 Premiers pas
