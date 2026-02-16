@@ -9,14 +9,40 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontpage',
+    'name' => 'My Application',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'frontpage\controllers',
+    'bootstrap' => ['log'],
+    'modules' => [
+        'gridview' => [
+            'class' => '\kartik\grid\Module',
+        ],
+    ],
+    'container' => [
+        'definitions' => [
+            \yii\widgets\ListView::class => [
+                'pager' => [
+                    'class' => \yii\bootstrap5\LinkPager::class,
+                ],
+            ],
+            \yii\grid\GridView::class => [
+                'pager' => [
+                    'class' => \yii\bootstrap5\LinkPager::class,
+                ],
+            ],
+            \kartik\grid\GridView::class => [
+                'pager' => [
+                    'class' => \yii\bootstrap5\LinkPager::class,
+                ],
+            ],
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontpage',
         ],
         'user' => [
+            'class' => \yii\web\User::class,
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontpage', 'httpOnly' => true],
@@ -26,7 +52,7 @@ return [
             'name' => 'advanced-frontpage',
         ],
         'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => (defined('YII_DEBUG') && YII_DEBUG) ? 3 : 0,
             'targets' => [
                 [
                     'class' => \yii\log\FileTarget::class,
@@ -41,6 +67,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'fnords' => 'fnord/index',
+                'fnord/<id_fnord:\d+>' => 'fnord/view',
             ],
         ],
     ],

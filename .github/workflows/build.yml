@@ -1,12 +1,22 @@
 on:
-  - pull_request
-  - push
+  push:
+    branches:
+      - master
+      - main
+      - develop
+  pull_request:
+    branches:
+      - master
+      - main
+      - develop
+  workflow_dispatch:
 
-name: build
+name: Tests
 
 jobs:
   tests:
     name: PHP ${{ matrix.php }}-mysql-${{ matrix.mysql }}
+    timeout-minutes: 30
 
     env:
       extensions: dom, json, gd, imagick, pdo, pdo_mysql
@@ -26,7 +36,7 @@ jobs:
           - "8.5"
 
         mysql:
-          - "5.7"
+          - "8.0"
           - "latest"
 
     services:
@@ -83,15 +93,28 @@ jobs:
 
       - name: Setup app advanced
         run: |
-          ./init --env=Development
-          sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2advanced_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" common/config/test-local.php
+          ./init --env=Stage --overwrite=y
+          sed -i "s/'dsn' => 'mysql:host=mysql-yii2advanced-tests;dbname=yii2advanced_stage_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" common/config/test-local.php
           sed -i "/'db'/a 'username' => 'root'," common/config/test-local.php
           sed -i "/'db'/a 'password' => 'root'," common/config/test-local.php
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" frontpage/config/main.php
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" backoffice/config/main.php
 
       - name: Apply migration
-        run: php yii_test migrate --interactive=0
+        run: php yii_test migrate/fresh --interactive=0
 
       - name: Run tests with codeception
-        run: vendor/bin/codecept run
+        run: vendor/bin/codecept run --no-interaction
+
+      - name: Upload test output on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-output-php${{ matrix.php }}-mysql${{ matrix.mysql }}
+          path: |
+            api/tests/_output/
+            backoffice/tests/_output/
+            common/tests/_output/
+            console/tests/_output/
+            frontpage/tests/_output/
+          retention-days: 7

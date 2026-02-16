@@ -9,6 +9,12 @@ return [
         'urlManager' => [
             'showScriptName' => true,
         ],
+        'user' => [
+            'class' => \yii\web\User::class,
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-frontpage', 'httpOnly' => true],
+        ],
         'request' => [
             'cookieValidationKey' => 'test',
         ],

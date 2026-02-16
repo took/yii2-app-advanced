@@ -27,7 +27,7 @@ return [
             'name' => 'advanced-api',
         ],
         'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => (defined('YII_DEBUG') && YII_DEBUG) ? 3 : 0,
             'targets' => [
                 [
                     'class' => \yii\log\FileTarget::class,

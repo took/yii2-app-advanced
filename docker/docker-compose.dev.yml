@@ -1,20 +1,29 @@
 services:
 
   app-dev:
-    build: dev
+    build:
+      context: ..
+      dockerfile: docker/dev/Dockerfile
+    environment:
+      - YII_DEBUG_ALLOWED_IPS=172.*
     ports:
-      - 20080:80
-      - 20081:8081
-      - 20082:8082
+      - "20080:80"
+      - "20081:8081"
+      - "20082:8082"
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "if [ \"$(stat -c '%U' /app/frontpage/runtime)\" != 'www-data' ] || [ \"$(stat -c '%U' /app/frontpage/web/assets)\" != 'www-data' ]; then chown -R www-data:www-data /app/frontpage/runtime /app/frontpage/web/assets && chmod -R ug+rwX /app/frontpage/runtime /app/frontpage/web/assets; fi && runuser -u www-data -- touch /app/frontpage/runtime/test_write && rm /app/frontpage/runtime/test_write && exit 0 || exit 1",
+      ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
-      - ./:/app
-    environment:
-      - YII_ENV=dev
-      - YII_DEBUG=true
-      - DB_NAME=yii2advanced_dev
+      - ../:/app
     depends_on:
       - mysql-yii2advanced-dev
     networks:
@@ -24,13 +33,31 @@ services:
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
+      - MYSQL_DATABASE=yii2advanced_dev
+      - MYSQL_USER=yii2advanced-dev
       - MYSQL_PASSWORD=secret
+    ports:
+      - "23306:3306"
+    volumes:
+      - mysql-dev-data:/var/lib/mysql
+    networks:
+      - yii2-dev-network
 
   #pgsql:
   #  image: postgres:9.5
   #  environment:
-  #    - POSTGRES_DB=yii2advanced
-  #    - POSTGRES_USER=yii2advanced
+  #    - POSTGRES_DB=yii2advanced_dev
+  #    - POSTGRES_USER=yii2advanced-dev
   #    - POSTGRES_PASSWORD=secret
+  #  networks:
+  #    - yii2-dev-network
+
+
+volumes:
+  mysql-dev-data:
+    name: yii2advanced-mysql-dev-data
+
+networks:
+  yii2-dev-network:
+    name: yii2-dev-network
+    driver: bridge

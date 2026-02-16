@@ -1,34 +1,22 @@
 services:
 
   app-prod:
-    build: prod
+    build:
+      context: ..
+      dockerfile: docker/prod/Dockerfile
     ports:
-      - 20080:80
-      - 20081:8081
-      - 20082:8082
+      - "40080:80"
+      - "40081:8081"
+      - "40082:8082"
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "if [ \"$(stat -c '%U' /app/runtime)\" != 'www-data' ] || [ \"$(stat -c '%U' /app/web/assets)\" != 'www-data' ]; then chown -R www-data:www-data /app/runtime /app/web/assets && chmod -R ug+rwX /app/runtime /app/web/assets; fi && runuser -u www-data -- touch /app/runtime/test_write && rm /app/runtime/test_write && exit 0 || exit 1",
+      ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-    environment:
-      - YII_ENV=dev
-      - YII_DEBUG=true
-      - DB_NAME=yii2advanced_dev
-    depends_on:
-      - mysql-yii2advanced-dev
-    networks:
-      - yii2-dev-network
-
-  mysql-yii2advanced-prod:
-    image: mysql:8.0
-    environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
-      - MYSQL_PASSWORD=secret
-
-  #pgsql:
-  #  image: postgres:9.5
-  #  environment:
-  #    - POSTGRES_DB=yii2advanced
-  #    - POSTGRES_USER=yii2advanced
-  #    - POSTGRES_PASSWORD=secret

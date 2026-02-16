@@ -1,2 +1,7 @@
 suite_namespace: backoffice\tests\unit
 actor: UnitTester
+bootstrap: false
+modules:
+  enabled:
+    - Yii2:
+        part: fixtures

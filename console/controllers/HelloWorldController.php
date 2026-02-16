@@ -1,12 +1,15 @@
 <?php
 
-namespace controllers;
+namespace console\controllers;
 
-class HelloWorldController
+use yii\console\Controller;
+use yii\console\ExitCode;
+
+class HelloWorldController extends Controller
 {
     public function actionIndex(): int
     {
         echo 'Hello World!' . PHP_EOL;
-        return \yii\console\ExitCode::OK;
+        return ExitCode::OK;
     }
 }

@@ -3,8 +3,9 @@
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
 
-/** @var \common\models\LoginForm $model */
+/** @var LoginForm $model */
 
+use backoffice\models\LoginForm;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 

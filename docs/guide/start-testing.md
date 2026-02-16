@@ -2,7 +2,7 @@ Testing
 ===============================
 
 Yii2 Advanced Application uses Codeception as its primary test framework.
-There are already some sample tests prepared in `tests` directory of `frontend`, `backend`, and `common`.
+There are already some sample tests prepared in `tests` directory of `frontpage`, `backoffice`, and `common`.
 In order for the following procedure to work, it is assumed that the application has been initialized using
 the `dev` environment. In the case where tests need to be executed in a `Production` environment, `yii_test` and
 `yii_test.bat` must be manually copied from the `environments/dev` folder into the project root directory.
@@ -55,18 +55,18 @@ fixtures, etc.
 This is done because `Yii2` module is enabled in unit tests config: `common/tests/unit.suite.yml`. You can disable it to
 run tests in complete isolation.
 
-### Frontend
+### Frontpage
 
-Frontend tests contain unit tests, functional tests, and acceptance tests.
+Frontpage tests contain unit tests, functional tests, and acceptance tests.
 Execute them by running:
 
 ```
-vendor/bin/codecept run -- -c frontend
+vendor/bin/codecept run -- -c frontpage
 ```
 
 Description of test suites:
 
-* `unit` ⇒ classes related to frontend application only.
+* `unit` ⇒ classes related to frontpage application only.
 * `functional` ⇒ application internal requests/responses (without a web server).
 * `acceptance` ⇒ web application, user interface and javascript interactions in real browser.
 
@@ -79,7 +79,7 @@ sure [geckodriver](https://github.com/mozilla/geckodriver) is in the `PATH`.
 
 To execute acceptance tests do the following:
 
-1. Rename `frontend/tests/acceptance.suite.yml.example` to `frontend/tests/acceptance.suite.yml` to enable suite
+1. Rename `frontpage/tests/acceptance.suite.yml.example` to `frontpage/tests/acceptance.suite.yml` to enable suite
    configuration
 
 1. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
@@ -94,7 +94,7 @@ To execute acceptance tests do the following:
 1. Auto-generate new support classes for acceptance tests:
 
     ```
-    vendor/bin/codecept build -- -c frontend
+    vendor/bin/codecept build -- -c frontpage
     ```
 
 1. Download [Selenium Server](https://www.seleniumhq.org/download/) and launch it:
@@ -109,19 +109,19 @@ To execute acceptance tests do the following:
 1. Start web server:
 
     ```
-    php -S 127.0.0.1:8080 -t frontend/web
+    php -S 127.0.0.1:8080 -t frontpage/web
     ```
 
 1. Now you can run all available tests
 
    ```
-   vendor/bin/codecept run acceptance -- -c frontend
+   vendor/bin/codecept run acceptance -- -c frontpage
    ```
 
-## Backend
+## Backoffice
 
-Backend application contain unit and functional test suites. Execute them by running:
+Backoffice application contain unit and functional test suites. Execute them by running:
 
 ```
-vendor/bin/codecept run -- -c backend
+vendor/bin/codecept run -- -c backoffice
 ```

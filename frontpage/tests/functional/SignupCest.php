@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\tests\functional;
+namespace frontpage\tests\functional;
 
-use frontend\tests\FunctionalTester;
+use frontpage\tests\FunctionalTester;
 
 class SignupCest
 {

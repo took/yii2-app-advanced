@@ -1,14 +1,14 @@
 <?php
 
-namespace frontend\tests\unit\models;
+namespace frontpage\tests\unit\models;
 
 use common\fixtures\UserFixture;
-use frontend\models\VerifyEmailForm;
+use frontpage\models\VerifyEmailForm;
 
 class VerifyEmailFormTest extends \Codeception\Test\Unit
 {
     /**
-     * @var \frontend\tests\UnitTester
+     * @var \frontpage\tests\UnitTester
      */
     protected $tester;
 
@@ -47,7 +47,7 @@ class VerifyEmailFormTest extends \Codeception\Test\Unit
         $user = $model->verifyEmail();
         verify($user)->instanceOf('common\models\User');
 
-        verify($user->username)->equals('test.test');
+        verify($user->username)->equals('testtest');
         verify($user->email)->equals('test@mail.com');
         verify($user->status)->equals(\common\models\User::STATUS_ACTIVE);
         verify($user->validatePassword('Test1234'))->true();

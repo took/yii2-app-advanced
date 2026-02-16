@@ -1,26 +1,57 @@
 services:
 
   app-stage:
-    build: stage
+    build:
+      context: ..
+      dockerfile: docker/stage/Dockerfile
     ports:
-      - 20080:80
-      - 20081:8081
-      - 20082:8082
+      - "30080:80"
+      - "30081:8081"
+      - "30082:8082"
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "if [ \"$(stat -c '%U' /app/runtime)\" != 'www-data' ] || [ \"$(stat -c '%U' /app/web/assets)\" != 'www-data' ]; then chown -R www-data:www-data /app/runtime /app/web/assets && chmod -R ug+rwX /app/runtime /app/web/assets; fi && runuser -u www-data -- touch /app/runtime/test_write && rm /app/runtime/test_write && exit 0 || exit 1",
+      ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
+    depends_on:
+      - mysql-yii2advanced-stage
+      - maildev-yii2advanced-stage
+    networks:
+      - yii2-stage-network
 
-  mysql:
+  mysql-yii2advanced-stage:
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
+      - MYSQL_DATABASE=yii2advanced_stage
+      - MYSQL_USER=yii2advanced-stage
       - MYSQL_PASSWORD=secret
+    ports:
+      - "33306:3306"
+    volumes:
+      - mysql-stage-data:/var/lib/mysql
+    networks:
+      - yii2-stage-network
 
-  #pgsql:
-  #  image: postgres:9.5
-  #  environment:
-  #    - POSTGRES_DB=yii2advanced
-  #    - POSTGRES_USER=yii2advanced
-  #    - POSTGRES_PASSWORD=secret
+  maildev-yii2advanced-stage:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+    networks:
+      - yii2-stage-network
+
+volumes:
+  mysql-stage-data:
+    name: yii2advanced-mysql-stage-data
+
+networks:
+  yii2-stage-network:
+    name: yii2-stage-network
+    driver: bridge

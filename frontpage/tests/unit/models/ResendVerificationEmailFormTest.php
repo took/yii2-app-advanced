@@ -1,15 +1,15 @@
 <?php
 
-namespace frontend\tests\unit\models;
+namespace frontpage\tests\unit\models;
 
 use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
-use frontend\models\ResendVerificationEmailForm;
+use frontpage\models\ResendVerificationEmailForm;
 
 class ResendVerificationEmailFormTest extends Unit
 {
     /**
-     * @var \frontend\tests\UnitTester
+     * @var \frontpage\tests\UnitTester
      */
     protected $tester;
 

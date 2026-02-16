@@ -1,9 +1,9 @@
 <?php
 
-namespace frontend\tests\functional;
+namespace frontpage\tests\functional;
 
 use common\fixtures\UserFixture;
-use frontend\tests\FunctionalTester;
+use frontpage\tests\FunctionalTester;
 
 class LoginCest
 {
@@ -36,7 +36,7 @@ class LoginCest
         $I->seeValidationError('Password cannot be blank.');
     }
 
-    protected function formParams($login, $password)
+    protected function formParams($login, $password): array
     {
         return [
             'LoginForm[username]' => $login,
@@ -52,7 +52,7 @@ class LoginCest
 
     public function checkInactiveAccount(FunctionalTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('test.test', 'Test1234'));
+        $I->submitForm('#login-form', $this->formParams('testtest', 'Test1234'));
         $I->seeValidationError('Incorrect username or password');
     }
 

@@ -1,12 +1,17 @@
 <?php
 
 /** @var yii\web\View $this */
-/** @var string $name */
-/** @var string $message */
-
-/** @var Exception $exception */
+/** @var Exception|null $exception */
 
 use yii\helpers\Html;
+
+if (YII_ENV == 'dev' && $exception !== null) {
+    $name = $exception->getName() ?? 'Error';
+    $message = $exception->getMessage() ?? 'An error occurred.';
+} else {
+    $name = 'Error';
+    $message = 'An error occurred.';
+}
 
 $this->title = $name;
 ?>

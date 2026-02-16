@@ -1,20 +1,22 @@
 <?php
 
-namespace frontend\controllers;
+namespace frontpage\controllers;
 
-use common\models\LoginForm;
-use frontend\models\ContactForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\VerifyEmailForm;
+use frontpage\models\ContactForm;
+use frontpage\models\LoginForm;
+use frontpage\models\PasswordResetRequestForm;
+use frontpage\models\ResendVerificationEmailForm;
+use frontpage\models\ResetPasswordForm;
+use frontpage\models\SignupForm;
+use frontpage\models\VerifyEmailForm;
 use Yii;
+use yii\base\Exception;
 use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -24,12 +26,12 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'example-login-required'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -37,7 +39,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'example-login-required'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -55,7 +57,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [
@@ -63,7 +65,7 @@ class SiteController extends Controller
             ],
             'captcha' => [
                 'class' => \yii\captcha\CaptchaAction::class,
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'fixedVerifyCode' => YII_ENV == 'test' ? 'testme' : null,
             ],
         ];
     }
@@ -71,19 +73,29 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
 
     /**
+     * Displays "hidden" page that requires a valid login.
+     *
+     * @return string
+     */
+    public function actionExampleLoginRequired(): string
+    {
+        return $this->render('example-login-required');
+    }
+
+    /**
      * Logs in a user.
      *
-     * @return mixed
+     * @return string|Response
      */
-    public function actionLogin()
+    public function actionLogin(): string|Response
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -104,9 +116,9 @@ class SiteController extends Controller
     /**
      * Logs out the current user.
      *
-     * @return mixed
+     * @return Response
      */
-    public function actionLogout()
+    public function actionLogout(): Response
     {
         Yii::$app->user->logout();
 
@@ -116,9 +128,9 @@ class SiteController extends Controller
     /**
      * Displays contact page.
      *
-     * @return mixed
+     * @return string|Response
      */
-    public function actionContact()
+    public function actionContact(): string|Response
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -139,9 +151,9 @@ class SiteController extends Controller
     /**
      * Displays about page.
      *
-     * @return mixed
+     * @return string
      */
-    public function actionAbout()
+    public function actionAbout(): string
     {
         return $this->render('about');
     }
@@ -149,9 +161,10 @@ class SiteController extends Controller
     /**
      * Signs user up.
      *
-     * @return mixed
+     * @return string|Response
+     * @throws Exception
      */
-    public function actionSignup()
+    public function actionSignup(): string|Response
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
@@ -167,9 +180,10 @@ class SiteController extends Controller
     /**
      * Requests password reset.
      *
-     * @return mixed
+     * @return string|Response
+     * @throws Exception
      */
-    public function actionRequestPasswordReset()
+    public function actionRequestPasswordReset(): string|Response
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -191,10 +205,10 @@ class SiteController extends Controller
      * Resets password.
      *
      * @param string $token
-     * @return mixed
-     * @throws BadRequestHttpException
+     * @return string|Response
+     * @throws BadRequestHttpException|Exception
      */
-    public function actionResetPassword($token)
+    public function actionResetPassword(string $token): string|Response
     {
         try {
             $model = new ResetPasswordForm($token);
@@ -218,9 +232,9 @@ class SiteController extends Controller
      *
      * @param string $token
      * @return yii\web\Response
-     * @throws BadRequestHttpException
+     * @throws BadRequestHttpException|\yii\db\Exception
      */
-    public function actionVerifyEmail($token)
+    public function actionVerifyEmail(string $token): Response
     {
         try {
             $model = new VerifyEmailForm($token);
@@ -239,9 +253,9 @@ class SiteController extends Controller
     /**
      * Resend verification email
      *
-     * @return mixed
+     * @return string|Response
      */
-    public function actionResendVerificationEmail()
+    public function actionResendVerificationEmail(): string|Response
     {
         $model = new ResendVerificationEmailForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {

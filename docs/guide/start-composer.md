@@ -26,43 +26,84 @@ directory:
   },
   "minimum-stability": "dev",
   "require": {
-    "php": ">=7.4.0",
-    "yiisoft/yii2": "~2.0.45",
+    "php": ">=8.2",
+    "yiisoft/yii2": "~2.0.54",
     "yiisoft/yii2-bootstrap5": "~2.0.2",
     "yiisoft/yii2-symfonymailer": "~2.0.3"
   },
   "require-dev": {
-    "yiisoft/yii2-debug": "~2.1.0",
-    "yiisoft/yii2-gii": "~2.2.0",
-    "yiisoft/yii2-faker": "~2.0.0",
-    "phpunit/phpunit": "~9.5.0",
-    "codeception/codeception": "^5.0.0 || ^4.0",
-    "codeception/lib-innerbrowser": "^4.0 || ^3.0 || ^1.1",
-    "codeception/module-asserts": "^3.0 || ^1.1",
+    "codeception/c3": "^2.8",
+    "codeception/codeception": "^5.0.0",
+    "codeception/lib-innerbrowser": "^4.0",
+    "codeception/module-asserts": "^3.0",
+    "codeception/module-filesystem": "^3.0",
+    "codeception/module-phpbrowser": "^3.0",
     "codeception/module-yii2": "^1.1",
-    "codeception/module-filesystem": "^3.0 || ^2.0 || ^1.1",
-    "codeception/verify": "^3.0 || ^2.2",
-    "symfony/browser-kit": "^6.0 || >=2.7 <=4.2.4"
+    "codeception/verify": "^3.0",
+    "phpstan/phpstan": "^2.1",
+    "symfony/process": "^6.3",
+    "yiisoft/yii2-coding-standards": "^3.0",
+    "yiisoft/yii2-debug": "~2.1.0",
+    "yiisoft/yii2-faker": "~2.0.0",
+    "yiisoft/yii2-gii": "~2.2.0"
+  },
+  "suggest": {
+    "took/yii2-gii-mcp": "MCP server for AI-powered Yii2 code generation - enables AI assistants (Firebender, Claude) to generate models, CRUD, controllers, and more through natural language"
   },
   "autoload-dev": {
     "psr-4": {
+      "api\\tests\\": [
+        "api/tests/",
+        "api/tests/_support"
+      ],
       "common\\tests\\": [
         "common/tests/",
         "common/tests/_support"
       ],
-      "backend\\tests\\": [
+      "backoffice\\tests\\": [
         "backoffice/tests/",
         "backoffice/tests/_support"
       ],
-      "frontend\\tests\\": [
+      "frontpage\\tests\\": [
         "frontpage/tests/",
         "frontpage/tests/_support"
       ]
     }
   },
+  "scripts": {
+    "cs": "./vendor/bin/phpcs -q assets/ commands/ controllers/ mail/ models/ tests/",
+    "cs-fix": "./vendor/bin/phpcbf -q assets/ commands/ controllers/ mail/ models/ tests/",
+    "post-install-cmd": [
+      "yii\\composer\\Installer::postInstall"
+    ],
+    "post-create-project-cmd": [
+      "yii\\composer\\Installer::postCreateProject",
+      "yii\\composer\\Installer::postInstall"
+    ],
+    "static": "./vendor/bin/phpstan --memory-limit=-1",
+    "tests": "./vendor/bin/codecept run --env php-builtin"
+  },
+  "extra": {
+    "yii\\composer\\Installer::postCreateProject": {
+      "setPermission": [
+        {
+          "runtime": "0777",
+          "web/assets": "0777",
+          "yii": "0755"
+        }
+      ]
+    },
+    "yii\\composer\\Installer::postInstall": {
+      "generateCookieValidationKey": [
+        "frontpage/config/main-local.php",
+        "backoffice/config/main-local.php"
+      ]
+    }
+  },
   "config": {
     "allow-plugins": {
-      "yiisoft/yii2-composer": true
+      "yiisoft/yii2-composer": true,
+      "codeception/c3": true
     },
     "process-timeout": 1800,
     "fxp-asset": {
@@ -76,6 +117,7 @@ directory:
     }
   ]
 }
+
 ```
 
 First we're updating basic information. Change `name`, `description`, `keywords`, `homepage` and `support` to match

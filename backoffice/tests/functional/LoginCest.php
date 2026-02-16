@@ -1,9 +1,9 @@
 <?php
 
-namespace backend\tests\functional;
+namespace backoffice\tests\functional;
 
-use backend\tests\FunctionalTester;
-use common\fixtures\UserFixture;
+use backoffice\tests\FunctionalTester;
+use common\fixtures\BackofficeUserFixture;
 
 /**
  * Class LoginCest
@@ -21,9 +21,17 @@ class LoginCest
     {
         return [
             'user' => [
-                'class' => UserFixture::class,
+                'class' => BackofficeUserFixture::class,
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
+        ];
+    }
+
+    protected function formParams($login, $password): array
+    {
+        return [
+            'LoginForm[username]' => $login,
+            'LoginForm[password]' => $password,
         ];
     }
 
@@ -33,9 +41,7 @@ class LoginCest
     public function loginUser(FunctionalTester $I)
     {
         $I->amOnRoute('/site/login');
-        $I->fillField('Username', 'erau');
-        $I->fillField('Password', 'password_0');
-        $I->click('login-button');
+        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
 
         $I->see('Logout (erau)', 'form button[type=submit]');
         $I->dontSeeLink('Login');

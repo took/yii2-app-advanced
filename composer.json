@@ -20,6 +20,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=8.2",
+    "kartik-v/yii2-grid": "dev-master",
     "yiisoft/yii2": "~2.0.54",
     "yiisoft/yii2-bootstrap5": "~2.0.2",
     "yiisoft/yii2-symfonymailer": "~2.0.3"
@@ -43,6 +44,15 @@
   "suggest": {
     "took/yii2-gii-mcp": "MCP server for AI-powered Yii2 code generation - enables AI assistants (Firebender, Claude) to generate models, CRUD, controllers, and more through natural language"
   },
+  "autoload": {
+    "psr-4": {
+      "api\\": "api/",
+      "backoffice\\": "backoffice/",
+      "common\\": "common/",
+      "console\\": "console/",
+      "frontpage\\": "frontpage/"
+    }
+  },
   "autoload-dev": {
     "psr-4": {
       "api\\tests\\": [
@@ -53,19 +63,23 @@
         "common/tests/",
         "common/tests/_support"
       ],
-      "backend\\tests\\": [
+      "backoffice\\tests\\": [
         "backoffice/tests/",
         "backoffice/tests/_support"
       ],
-      "frontend\\tests\\": [
+      "console\\tests\\": [
+        "console/tests/",
+        "console/tests/_support"
+      ],
+      "frontpage\\tests\\": [
         "frontpage/tests/",
         "frontpage/tests/_support"
       ]
     }
   },
   "scripts": {
-    "cs": "./vendor/bin/phpcs -q assets/ commands/ controllers/ mail/ models/ tests/",
-    "cs-fix": "./vendor/bin/phpcbf -q assets/ commands/ controllers/ mail/ models/ tests/",
+    "cs": "./vendor/bin/phpcs -q api/ backoffice/ common/ console/ frontpage/",
+    "cs-fix": "./vendor/bin/phpcbf -q api/ backoffice/ common/ console/ frontpage/",
     "post-install-cmd": [
       "yii\\composer\\Installer::postInstall"
     ],
@@ -80,8 +94,13 @@
     "yii\\composer\\Installer::postCreateProject": {
       "setPermission": [
         {
-          "runtime": "0777",
-          "web/assets": "0777",
+          "api/runtime": "0777",
+          "api/assets": "0777",
+          "console/runtime": "0777",
+          "backoffice/runtime": "0777",
+          "backoffice/assets": "0777",
+          "frontpage/runtime": "0777",
+          "frontpage/assets": "0777",
           "yii": "0755"
         }
       ]

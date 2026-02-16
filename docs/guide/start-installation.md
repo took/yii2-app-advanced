@@ -3,7 +3,7 @@ Installation
 
 ## Requirements
 
-The minimum requirement by this project template is that your Web server supports PHP 5.6.0.
+The minimum requirement by this project template is that your Web server supports PHP 8.2.0.
 
 ## Installing using Composer
 
@@ -20,15 +20,9 @@ directory name if you want.
 
 It uses [asset-packagist](https://asset-packagist.org/) for managing bower and npm package dependencies through
 Composer.
-Also you can use [asset-plugin](https://packagist.org/packages/fxp/composer-asset-plugin), as in earlier versions, but
+
+Also, you can use [asset-plugin](https://packagist.org/packages/fxp/composer-asset-plugin), as in earlier versions, but
 it works slowly.
-
-## Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](https://www.yiiframework.com/download/) to
-a directory named `advanced` that is directly under the Web root.
-
-Then follow the instructions given in the next subsection.
 
 ## Preparing application
 
@@ -54,17 +48,17 @@ the installed application. You only need to do these once for all.
 
 4. Set document roots of your web server:
 
-    - for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend.test/`
-    - for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend.test/`
+    - for your main WebApp "frontpage" `/path/to/yii-application/frontpage/web/` and using the URL `http://frontpage.test/`
+    - for backoffice `/path/to/yii-application/backoffice/web/` and using the URL `http://backoffice.test/`
 
    For Apache it could be the following:
 
    ```apache
        <VirtualHost *:80>
-           ServerName frontend.test
-           DocumentRoot "/path/to/yii-application/frontend/web/"
+           ServerName frontpage.test
+           DocumentRoot "/path/to/yii-application/frontpage/web/"
            
-           <Directory "/path/to/yii-application/frontend/web/">
+           <Directory "/path/to/yii-application/frontpage/web/">
                # use mod_rewrite for pretty URL support
                RewriteEngine on
                # If a directory or a file exists, use the request directly
@@ -87,10 +81,10 @@ the installed application. You only need to do these once for all.
        </VirtualHost>
        
        <VirtualHost *:80>
-           ServerName backend.test
-           DocumentRoot "/path/to/yii-application/backend/web/"
+           ServerName backoffice.test
+           DocumentRoot "/path/to/yii-application/backoffice/web/"
            
-           <Directory "/path/to/yii-application/backend/web/">
+           <Directory "/path/to/yii-application/backoffice/web/">
                # use mod_rewrite for pretty URL support
                RewriteEngine on
                # If a directory or a file exists, use the request directly
@@ -123,12 +117,12 @@ the installed application. You only need to do these once for all.
            listen 80; ## listen for ipv4
            #listen [::]:80 default_server ipv6only=on; ## listen for ipv6
 
-           server_name frontend.test;
-           root        /path/to/yii-application/frontend/web/;
+           server_name frontpage.test;
+           root        /path/to/yii-application/frontpage/web/;
            index       index.php;
 
-           access_log  /path/to/yii-application/log/frontend-access.log;
-           error_log   /path/to/yii-application/log/frontend-error.log;
+           access_log  /path/to/yii-application/log/frontpage-access.log;
+           error_log   /path/to/yii-application/log/frontpage-error.log;
 
            location / {
                # Redirect everything that isn't a real file to index.php
@@ -166,12 +160,12 @@ the installed application. You only need to do these once for all.
            listen 80; ## listen for ipv4
            #listen [::]:80 default_server ipv6only=on; ## listen for ipv6
        
-           server_name backend.test;
-           root        /path/to/yii-application/backend/web/;
+           server_name backoffice.test;
+           root        /path/to/yii-application/backoffice/web/;
            index       index.php;
        
-           access_log  /path/to/yii-application/log/backend-access.log;
-           error_log   /path/to/yii-application/log/backend-error.log;
+           access_log  /path/to/yii-application/log/backoffice-access.log;
+           error_log   /path/to/yii-application/log/backoffice-error.log;
        
            location / {
                # Redirect everything that isn't a real file to index.php
@@ -211,13 +205,13 @@ the installed application. You only need to do these once for all.
    Add the following lines:
 
    ```
-   127.0.0.1   frontend.test
-   127.0.0.1   backend.test
+   127.0.0.1   frontpage.test
+   127.0.0.1   backoffice.test
    ```
 
-6. Open your browser and go to http://frontend.test/
+6. Open your browser and go to http://frontpage.test/
 
-7. Create a user by selecting the Sign Up menu option at the top of the frontend home page.
+7. Create a user by selecting the Sign Up menu option at the top of the frontpage home page.
 
 8. Provide the requested credentials, and complete the data entry with the Signup button. You will be presented with a
    message:
@@ -226,7 +220,7 @@ the installed application. You only need to do these once for all.
    ``` 
 9. Despite stating that a confirmation email has been sent, the default settings for the mailer prevents the sending of
    a real email.
-   Instead, an eml format file is created in the directory `@frontend/runtime/mail`.
+   Instead, an eml format file is created in the directory `@frontpage/runtime/mail`.
    Either open this file with a mail client such as Outlook or Thunderbird, or use a text editor to retrieve the URL
    which is used to confirm the User creation.
    The URL will need to be modified to remove
@@ -241,10 +235,10 @@ the installed application. You only need to do these once for all.
     ```
     Your email has been confirmed!
     ```
-10. You are now automatically logged in to the frontend application.
-    The same credentials can then be used to login to the backend application.
+10. You are now automatically logged in to the frontpage application.
+    The same credentials can then be used to login to the backoffice application.
 
-> Note: if you want to run advanced template on a single domain so `/` is frontend and `/admin` is backend, refer
+> Note: if you want to run advanced template on a single domain so `/` is frontpage and `/admin` is backoffice, refer
 > to [Using advanced project template at shared hosting](topic-shared-hosting.md).
 
 ## Installing using Vagrant
@@ -284,8 +278,8 @@ steps!
 
 That's all. You just need to wait for completion! After that you can access project locally by URLs:
 
-* frontend: http://y2aa-frontend.test
-* backend: http://y2aa-backend.test
+* frontpage: http://y2aa-frontpage.test
+* backoffice: http://y2aa-backoffice.test
 
 #### Manual for Windows users
 
@@ -312,18 +306,18 @@ That's all. You just need to wait for completion! After that you can access proj
 
 That's all. You just need to wait for completion! After that you can access project locally by URLs:
 
-* frontend: http://y2aa-frontend.test
-* backend: http://y2aa-backend.test
+* frontpage: http://y2aa-frontpage.test
+* backoffice: http://y2aa-backoffice.test
 
 ### Installing using Docker
 
 Install the application dependencies
 
-    docker-compose run --rm backend composer install
+    docker-compose run --rm backoffice composer install
 
 Initialize the application by running the `init` command within a container
 
-    docker-compose run --rm backend php /app/init
+    docker-compose run --rm backoffice php /app/init
 
 Adjust the components['db'] configuration in `common/config/main-local.php` accordingly.
 
@@ -331,7 +325,7 @@ Adjust the components['db'] configuration in `common/config/main-local.php` acco
         'username' => 'yii2advanced',
         'password' => 'secret',
 
-> Docker networking creates a DNS entry for the host `mysql` available from your `backend` and `frontend` containers.
+> Docker networking creates a DNS entry for the host `mysql` available from your `backoffice` and `frontpage` containers.
 
 > If you want to use another database, such a Postgres, uncomment the corresponding section in `docker-compose.yml` and
 > update your database connection.
@@ -346,10 +340,10 @@ Start the application
 
 Run the migrations
 
-    docker-compose run --rm backend yii migrate          
+    docker-compose run --rm backoffice yii migrate          
 
 Access it in your browser by opening
 
-- frontend: http://127.0.0.1:20080
-- backend: http://127.0.0.1:21080
+- frontpage: http://127.0.0.1:20080
+- backoffice: http://127.0.0.1:21080
 

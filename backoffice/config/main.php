@@ -9,16 +9,42 @@ $params = array_merge(
 
 return [
     'id' => 'app-backoffice',
+    'name' => 'My Application Backoffice',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backoffice\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'gridview' => [
+            'class' => '\kartik\grid\Module',
+        ],
+    ],
+    'container' => [
+        'definitions' => [
+            \yii\widgets\ListView::class => [
+                'pager' => [
+                    'class' => \yii\bootstrap5\LinkPager::class,
+                ],
+            ],
+            \yii\grid\GridView::class => [
+                'pager' => [
+                    'class' => \yii\bootstrap5\LinkPager::class,
+                ],
+            ],
+            \kartik\grid\GridView::class => [
+                'pager' => [
+                    'class' => \yii\bootstrap5\LinkPager::class,
+                ],
+            ],
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backoffice',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'class' => \yii\web\User::class,
+            'accessChecker' => 'backoffice\components\AccessChecker',
+            'identityClass' => 'common\models\BackofficeUser',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backoffice', 'httpOnly' => true],
         ],
@@ -27,7 +53,7 @@ return [
             'name' => 'advanced-backoffice',
         ],
         'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => (defined('YII_DEBUG') && YII_DEBUG) ? 3 : 0,
             'targets' => [
                 [
                     'class' => \yii\log\FileTarget::class,

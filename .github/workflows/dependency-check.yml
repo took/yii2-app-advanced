@@ -1,0 +1,120 @@
+name: Dependency Check
+
+on:
+  schedule:
+    # Run every Sunday at midnight UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  composer-audit:
+    name: Composer Security Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, json, pdo, pdo_mysql
+          coverage: none
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
+
+      - name: Run security audit
+        id: audit
+        run: |
+          # Run composer audit and capture output
+          composer audit --format=json > audit.json || EXIT_CODE=$?
+          if [ -n "$EXIT_CODE" ] && [ "$EXIT_CODE" -ne 0 ]; then
+            echo "Security vulnerabilities found!"
+            cat audit.json | jq '.' || cat audit.json
+            echo "has_vulnerabilities=true" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          echo "has_vulnerabilities=false" >> $GITHUB_OUTPUT
+          echo "No vulnerabilities found"
+        continue-on-error: true
+
+      - name: Check for outdated dependencies
+        id: outdated
+        run: |
+          echo "## Outdated Dependencies" > outdated-report.md
+          echo "" >> outdated-report.md
+          echo "\`\`\`" >> outdated-report.md
+          composer outdated --direct --strict 2>&1 >> outdated-report.md || EXIT_CODE=$?
+          echo "\`\`\`" >> outdated-report.md
+          if [ -n "$EXIT_CODE" ] && [ "$EXIT_CODE" -ne 0 ]; then
+            echo "has_outdated=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_outdated=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+
+      - name: Create issue for vulnerabilities
+        if: steps.audit.outputs.has_vulnerabilities == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const audit = JSON.parse(fs.readFileSync('audit.json', 'utf8'));
+
+            let body = '## Security Vulnerabilities Found\n\n';
+            body += 'Please run `composer audit` locally for details.\n\n';
+
+            if (audit.advisories && Object.keys(audit.advisories).length > 0) {
+              body += '### Affected Packages:\n';
+              for (const [pkg, issues] of Object.entries(audit.advisories)) {
+                for (const issue of issues) {
+                  body += `- **${pkg}**: ${issue.title}\n`;
+                  if (issue.cve) body += `  - CVE: ${issue.cve}\n`;
+                  if (issue.link) body += `  - Link: ${issue.link}\n`;
+                }
+              }
+            }
+
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'security,vulnerability',
+              state: 'open'
+            });
+
+            const existingIssue = issues.data.find(i => i.title === 'Security Vulnerabilities Detected');
+
+            if (!existingIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: 'Security Vulnerabilities Detected',
+                body: body,
+                labels: ['security', 'vulnerability']
+              });
+            }
+
+      - name: Upload audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: composer-audit-results
+          path: |
+            audit.json
+            outdated-report.md
+          retention-days: 30

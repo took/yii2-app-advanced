@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\tests;
+namespace backoffice\tests;
 
 /**
  * Inherited Methods
