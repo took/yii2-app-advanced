@@ -1,0 +1,34 @@
+services:
+
+  app-tests:
+    build:
+      context: ..
+      dockerfile: docker/tests/Dockerfile
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+    depends_on:
+      - mysql-yii2advanced-tests
+    networks:
+      - yii2-tests-network
+
+  mysql-yii2advanced-tests:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=verysecret
+      - MYSQL_DATABASE=yii2advanced_stage_test
+      - MYSQL_USER=yii2advanced-stage
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - mysql-tests-data:/var/lib/mysql
+    networks:
+      - yii2-tests-network
+
+volumes:
+  mysql-tests-data:
+    name: yii2advanced-mysql-tests-data
+
+networks:
+  yii2-tests-network:
+    name: yii2-tests-network
+    driver: bridge

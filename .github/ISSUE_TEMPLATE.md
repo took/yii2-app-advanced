@@ -4,11 +4,10 @@
 
 ### What do you get instead?
 
-
 ### Additional info
 
-| Q                | A
-| ---------------- | ---
-| Yii version       |
+| Q                | A 
+|------------------|---
+| Yii version      |
 | PHP version      |
 | Operating system |

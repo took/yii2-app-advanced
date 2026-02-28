@@ -11,7 +11,8 @@ The root directory contains the following subdirectories:
 
 Root directory contains a set of files.
 
-- `.gitignore` contains a list of directories ignored by git version system. If you need something never get to your source
+- `.gitignore` contains a list of directories ignored by git version system. If you need something never get to your
+  source
   code repository, add it there.
 - `composer.json` - Composer config described in [Configuring Composer](start-composer.md).
 - `init` - initialization script described in [Configuration and environments](structure-environments.md).

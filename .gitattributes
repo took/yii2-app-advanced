@@ -5,3 +5,29 @@
 /.scrutinizer.yml           export-ignore
 /.travis.yml                export-ignore
 /docs                       export-ignore
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force LF line endings for shell scripts (required for Docker/Linux containers)
+*.sh text eol=lf
+
+# Force LF for PHP CLI scripts without extension
+init text eol=lf
+yii text eol=lf
+yii_test text eol=lf
+
+# Force LF for docker entrypoint scripts
+*docker-entrypoint.sh text eol=lf
+
+# Windows scripts should use CRLF
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary

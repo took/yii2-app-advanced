@@ -1,40 +1,44 @@
 Creating links from backend to frontend
 =======================================
 
-Often it's required to create links from the backend application to the frontend application. Since the frontend application may
+Often it's required to create links from the backend application to the frontend application. Since the frontend
+application may
 contain its own URL manager rules you need to duplicate that for the backend application by naming it differently:
 
 ```php
 return [
     'components' => [
         'urlManager' => [
-            // here is your normal backend url manager config
+            // here is your normal backoffice url manager config
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named url managers!
             'hostInfo' => 'https://example.com',    // the full base domain name to use for the links
-            // here is your frontend URL manager config
+            // here is your frontpage URL manager config
         ],
 
     ],
 ];
 ```
 
-The URL Manager doesn't magically know the root URL of another app on another sub-domain. This is where the `hostInfo` param
+The URL Manager doesn't magically know the root URL of another app on another sub-domain. This is where the `hostInfo`
+param
 comes in. It defines the full domain for the URL manager to generate absolute links with.
 
-You may need to generate links to the frontend or any another app (ie: [topic-adding-more-apps.md](topic-adding-more-apps.md)). You can have multiple URL managers for multiple apps on multiple sub-domains.
+You may need to generate links to the frontend or any another app (
+ie: [topic-adding-more-apps.md](topic-adding-more-apps.md)). You can have multiple URL managers for multiple apps on
+multiple sub-domains.
 
 ```php
 return [
     'components' => [
         'urlManager' => [
-            // here is your normal backend URL manager config
+            // here is your normal backoffice URL manager config
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named URL managers!
             'hostInfo' => 'https://example.com',    // the full base domain name to use for the links
-            // here is your frontend URL manager config
+            // here is your frontpage URL manager config
         ],
         'urlManagerBlog' => [
             'class' => 'yii\web\UrlManager',            // class is required on custom named URL managers!
@@ -83,17 +87,17 @@ return [
     // ...
     'components' => [
         'urlManager' => [
-            // backend URL manager
+            // backoffice URL manager
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/backend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/backoffice-rules.php'),
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named url managers!
             'hostInfo' => 'https://example.com',    // the full base domain name to use for the links
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/frontend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/frontpage-rules.php'),
         ],
         // ...
 
@@ -104,11 +108,14 @@ return [
 
 ## Hardcoded hostInfo URL
 
-The examples above are to illustrate what is expected in the field. `hostInfo` expects a full domain name like `https://example.com` or
-`https://backend.example.com`. Having a hard-coded domain in your config isn't very practical. Especially for handling multiple environments
+The examples above are to illustrate what is expected in the field. `hostInfo` expects a full domain name like
+`https://example.com` or
+`https://backend.example.com`. Having a hard-coded domain in your config isn't very practical. Especially for handling
+multiple environments
 (local, staging, production, etc).
 
-There are a few ways you can do this. The following way allows you to make use of Yii's environments and the `init` process.
+There are a few ways you can do this. The following way allows you to make use of Yii's environments and the `init`
+process.
 
 We first need to load functions early on during Composer's autoload.
 
@@ -116,9 +123,9 @@ In your `composer.json` file, add the following:
 
 ```json
 "autoload": {
-    "files": [
-        "common/functions.php"
-    ]
+"files": [
+"common/functions.php"
+]
 }
 ```
 
@@ -144,7 +151,8 @@ function getDomain($subDomain = null)
 }
 ```
 
-Now we need to define our constants in the corresponding `web/index.php` files. Here are the paths for the default environments.
+Now we need to define our constants in the corresponding `web/index.php` files. Here are the paths for the default
+environments.
 
 ```
 environments/dev/backend/web/index.php
@@ -153,7 +161,8 @@ environments/prod/backend/web/index.php
 environments/prod/frontend/web/index.php
 ```
 
-In the `dev` copies, we will use our local development domain name (ie: mylocalsite.test) and in the `prod` copies we will use the real domain (ie: example.com).
+In the `dev` copies, we will use our local development domain name (ie: mylocalsite.test) and in the `prod` copies we
+will use the real domain (ie: example.com).
 
 Add to the top of the index files:
 
@@ -193,7 +202,7 @@ Add the following in `common/config/bootstrap.php`:
 
 ```php
 Yii::setAlias('@frontendDomain', getDomain());              // ex: https://somedomain.tld
-Yii::setAlias('@backendDomain', getDomain('backend'));      // ex: https://backend.somedomain.tld
+Yii::setAlias('@backendDomain', getDomain('backoffice'));      // ex: https://backend.somedomain.tld
 ```
 
 Remember `www` is a sub-domain, so pass it like one if you use it like so: `getDomain('www')`
@@ -205,17 +214,17 @@ return [
     // ...
     'components' => [
         'urlManager' => [
-            // backend URL manager
+            // backoffice URL manager
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/backend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/backoffice-rules.php'),
         ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\UrlManager',        // class is required on custom named URL managers!
             'hostInfo' => Yii::getAlias('@frontendDomain'),    // the full base domain name to use for the links
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => require Yii::getAlias('@common/config/rules/frontend-rules.php'),
+            'rules' => require Yii::getAlias('@common/config/rules/frontpage-rules.php'),
         ],
         // ...
 

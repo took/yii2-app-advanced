@@ -5,7 +5,7 @@ While having separate frontend and backend is common, sometimes it's not enough.
 application for, say, a blog. In order to get it:
 
 1. Copy `frontend` to `blog`, `environments/dev/frontend` to `environments/dev/blog` and `environments/prod/frontend`
-to `environments/prod/blog`.
+   to `environments/prod/blog`.
 2. Adjust namespaces and paths to start with `blog` instead of `frontend`.
 3. In `common\config\bootstrap.php` add `Yii::setAlias('blog', dirname(dirname(__DIR__)) . '/blog');`.
 4. Make adjustments to `environments/index.php` (marked with `+`):
@@ -15,10 +15,10 @@ return [
     'Development' => [
         'path' => 'dev',
         'setWritable' => [
-            'backend/runtime',
-            'backend/web/assets',
-            'frontend/runtime',
-            'frontend/web/assets',
+            'backoffice/runtime',
+            'backoffice/web/assets',
+            'frontpage/runtime',
+            'frontpage/web/assets',
 +           'blog/runtime',
 +           'blog/web/assets',
         ],
@@ -27,18 +27,18 @@ return [
             'yii_test',
         ],
         'setCookieValidationKey' => [
-            'backend/config/main-local.php',
-            'frontend/config/main-local.php',
+            'backoffice/config/main-local.php',
+            'frontpage/config/main-local.php',
 +           'blog/config/main-local.php',
         ],
     ],
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
-            'backend/runtime',
-            'backend/web/assets',
-            'frontend/runtime',
-            'frontend/web/assets',
+            'backoffice/runtime',
+            'backoffice/web/assets',
+            'frontpage/runtime',
+            'frontpage/web/assets',
 +           'blog/runtime',
 +           'blog/web/assets',
         ],
@@ -46,8 +46,8 @@ return [
             'yii',
         ],
         'setCookieValidationKey' => [
-            'backend/config/main-local.php',
-            'frontend/config/main-local.php',
+            'backoffice/config/main-local.php',
+            'frontpage/config/main-local.php',
 +           'blog/config/main-local.php',
         ],
     ],

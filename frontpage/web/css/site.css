@@ -1,0 +1,171 @@
+main > .container, main > .container-fluid {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    font-size: .9em;
+    height: 60px;
+}
+
+.footer > .container, .footer > .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    content: '';
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 2px 4px;
+    background: transparent;
+}
+
+a.asc:after {
+    border-bottom: solid 7px #212529;
+    border-top-width: 0;
+}
+
+a.desc:after {
+    border-top: solid 7px #212529;
+    border-bottom-width: 0;
+}
+
+.grid-view th,
+.grid-view td:last-child {
+    white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.navbar form > button.logout {
+    padding-top: 7px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 767px) {
+    .navbar form > button.logout {
+        display: block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+.navbar form > button.logout:focus,
+.navbar form > button.logout:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar form > button.logout:focus {
+    outline: none;
+}
+
+/* style breadcrumb widget as in previous bootstrap versions */
+.breadcrumb {
+    background-color: var(--bs-gray-200);
+    border-radius: .25rem;
+    padding: .75rem 1rem;
+}
+
+.breadcrumb-item > a {
+    text-decoration: none;
+}
+
+/* Fix anchor links offset for fixed navbar */
+:target {
+    scroll-margin-top: 80px;
+}
+
+[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Enhanced validation error styling for Bootstrap 5 */
+.is-invalid ~ .invalid-feedback,
+.was-validated .form-control:invalid ~ .invalid-feedback {
+    display: block !important;
+    color: #dc3545 !important;
+    font-size: 0.925rem !important;
+    font-weight: 500 !important;
+    margin-top: 0.375rem !important;
+    padding: 0.375rem 0.5rem !important;
+    background-color: #f8d7da !important;
+    border-left: 3px solid #dc3545 !important;
+    border-radius: 0.25rem !important;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15) !important;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+}
+
+/* Legacy has-error support for older code */
+.has-error .form-control {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15) !important;
+}
+
+.has-error .form-control:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.has-error .help-block,
+.has-error .error-message {
+    display: block !important;
+    color: #dc3545 !important;
+    font-size: 0.925rem !important;
+    font-weight: 500 !important;
+    margin-top: 0.375rem !important;
+    padding: 0.375rem 0.5rem !important;
+    background-color: #f8d7da !important;
+    border-left: 3px solid #dc3545 !important;
+    border-radius: 0.25rem !important;
+}
+
+/* Field wrapper error state */
+.field-error,
+.has-error {
+    margin-bottom: 1.25rem !important;
+}
+
+/* Form submit button spacing */
+.form-group {
+    margin-top: 20px;
+}

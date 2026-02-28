@@ -32,10 +32,10 @@ class Alert extends \yii\bootstrap5\Widget
      * - value: the bootstrap alert type (i.e. danger, success, info, warning)
      */
     public $alertTypes = [
-        'error'   => 'alert-danger',
-        'danger'  => 'alert-danger',
+        'error' => 'alert-danger',
+        'danger' => 'alert-danger',
         'success' => 'alert-success',
-        'info'    => 'alert-info',
+        'info' => 'alert-info',
         'warning' => 'alert-warning'
     ];
     /**
@@ -59,7 +59,7 @@ class Alert extends \yii\bootstrap5\Widget
                 continue;
             }
 
-            foreach ((array) $flash as $i => $message) {
+            foreach ((array)$flash as $i => $message) {
                 echo \yii\bootstrap5\Alert::widget([
                     'body' => $message,
                     'closeButton' => $this->closeButton,

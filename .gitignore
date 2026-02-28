@@ -1,6 +1,7 @@
 # yii console commands
 /yii
 /yii_test
+/yii.bat
 /yii_test.bat
 
 # phpstorm project files
@@ -23,11 +24,19 @@ Thumbs.db
 # composer vendor dir
 /vendor
 
+# Ignore composer.lock
+# Uncomment the next line if you do not want to push your composer.lock (not recommended in most szenarios)
+#composer.lock
+
 # composer itself is not needed
 composer.phar
 
-# Mac DS_Store Files
+# OS specific
 .DS_Store
+.directory
+
+# Hidden .md files
+/.*.md
 
 # phpunit itself is not needed
 phpunit.phar
@@ -38,9 +47,156 @@ phpunit.phar
 /.vagrant
 
 # ignore generated files
-/frontend/web/index.php
-/frontend/web/index-test.php
-/frontend/web/robots.txt
-/backend/web/index.php
-/backend/web/index-test.php
-/backend/web/robots.txt
+/c3.php
+/frontpage/web/index.php
+/frontpage/web/index-test.php
+/frontpage/web/robots.txt
+/backoffice/web/index.php
+/backoffice/web/index-test.php
+/backoffice/web/robots.txt
+/api/web/index.php
+/api/web/index-test.php
+/api/web/robots.txt
+
+# Backup files
+*.bak
+*~
+
+# =========================
+# AI / LLM / Agent tooling
+# =========================
+
+# Environment & secrets (LLM providers, MCP servers, agents)
+.env
+.env.*
+*.env
+.env.local
+.env.development
+.env.production
+
+# API keys & credentials
+secrets.json
+secrets.yaml
+secrets.yml
+credentials.json
+*.key
+*.pem
+
+# OpenAI / Anthropic / Azure OpenAI local configs
+.openai
+.anthropic
+.azure
+.llm
+.llmrc
+.ai
+.ai-cache
+
+# Cursor / AI IDEs
+.cursor
+.cursorignore
+
+# Continue.dev
+.continue
+.continueignore
+
+# Codeium
+.codeium
+
+# Copilot local cache
+.github/copilot
+
+# Firebender
+/.firebender
+/firebender.json
+
+# =========================
+# MCP (Model Context Protocol)
+# =========================
+
+# MCP local server configs
+.mcp
+.mcp.json
+mcp.config.json
+mcp.local.json
+mcp.secrets.json
+
+# MCP runtime / state
+.mcp-cache
+.mcp-state
+.mcp-logs
+mcp-logs/
+
+# took/yii2-gii-mcp
+/config-mcp.php
+
+# =========================
+# Agent runtimes & memory
+# =========================
+
+# LangChain / LlamaIndex / agent memory
+.langchain
+.llamaindex
+.vectorstore
+.vectorstores
+.chroma
+.chroma-db
+.qdrant
+.weaviate
+.pinecone
+
+# Local embeddings / indexes
+embeddings/
+indexes/
+vectorstore/
+knowledge-base/
+
+# Agent scratchpads / reasoning logs
+agent-logs/
+agent-memory/
+thoughts/
+scratchpad/
+
+# =========================
+# Local AI runtimes
+# =========================
+
+# Ollama
+.ollama
+ollama.log
+
+# LM Studio
+.lmstudio
+
+# Local model weights
+models/
+*.gguf
+*.bin
+*.safetensors
+
+# =========================
+# Generated AI artifacts
+# =========================
+
+# AI-generated code dumps
+.ai-generated/
+.generated/
+.autogen/
+
+# Prompt experimentation
+prompts.local/
+prompt-cache/
+
+# =========================
+# Jupyter / notebooks
+# =========================
+
+.ipynb_checkpoints
+
+# =========================
+# Temporary experiment logs
+# =========================
+
+*.log
+logs/
+tmp/
+.temp/
