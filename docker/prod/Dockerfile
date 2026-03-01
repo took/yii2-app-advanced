@@ -1,8 +1,5 @@
 FROM yiisoftware/yii2-php:8.5-apache-latest
 
-# Update MOTD
-RUN echo "Yii2 Advanced App - Production" >> /etc/motd
-
 # Prevent detection of dubious ownership at /app
 RUN git config --global --add safe.directory /app
 
@@ -20,9 +17,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     default-mysql-client \
     && docker-php-ext-install pdo_mysql \
-    && pecl install pcov \
-    && docker-php-ext-enable pcov \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Update MOTD
+RUN echo "Yii2 Advanced App - Production" >> /etc/motd
 
 # Set working directory
 WORKDIR /app
