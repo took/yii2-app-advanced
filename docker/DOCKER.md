@@ -113,27 +113,28 @@ While there are 3 environments defined in `/environments` (dev, stage and prod),
 docker-compose files (dev, stage, test and prod). `docker-compose.stage.yml` and `docker-compose.test.yml` both
 use `/environments/stage`.
 
-| Docker Compose                | 'dev'        | 'tests'           | 'stage'           | 'prod'            |
-|-------------------------------|--------------|-------------------|-------------------|-------------------|
-| Mount source into container   | ✓            | Copy during build | Copy during build | Copy during build |
-| `./init`                      | Run manually | During Build      | During Build      | Run manually      |
-| YII_ENV                       | `dev`        | `stage`           | `stage`           | `prod`            |
-| YII_DEBUG                     | `true`       | `false`           | `false`           | `false`           |
-| Module 'debug'                | ✓            | -                 | -                 | -                 |
-| Module 'gii'                  | ✓            | -                 | -                 | -                 |
-| tests available               | ✓            | ✓                 | -                 | -                 |
-| `composer install`            | Run manually | During Build      | During Build      | Run manually      |
-| With dev dependencies         | ✓            | ✓                 | -                 | -                 |
-| `yii migrate`                 | Run manually | On Startup        | On Startup        | Run manually      |
-| Build in DB                   | ✓            | ✓                 | ✓                 | -                 |
-| DB port exposed to localhost  | 23306        | n/a               | 33306             | n/a               |
-| Create default BackofficeUser | Run manually | -                 | On Startup        | -                 |
-| Initialize example data       | Run manually | -                 | On Startup        | -                 |
-| `rm -rf /var/lib/apt/lists/*` | -            | ✓                 | -                 | ✓                 |
-| Port for MailDev              | n/a          | n/a               | 1080              | n/a               |
-| Port for frontpage app        | 20080        | n/a               | 30080             | 40080             |
-| Port for backoffice app       | 20081        | n/a               | 30081             | 40081             |
-| Port for api app              | 20082        | n/a               | 30082             | 40082             |
+| Docker Compose                | 'dev'           | 'tests'       | 'stage'       | 'prod'        |
+|-------------------------------|-----------------|---------------|---------------|---------------|
+| Mount source into container   | ✓               | Copy in build | Copy in build | Copy in build |
+| `./init`                      | Run manually    | During Build  | During Build  | Run manually  |
+| YII_ENV                       | `dev`           | `stage`       | `stage`       | `prod`        |
+| YII_DEBUG                     | `true`          | `false`       | `false`       | `false`       |
+| Module 'debug'                | ✓               | -             | -             | -             |
+| Module 'gii'                  | ✓               | -             | -             | -             |
+| tests available               | ✓               | ✓             | -             | -             |
+| `composer install`            | Run manually    | During Build  | During Build  | Run manually  |
+| With dev dependencies         | ✓               | ✓             | -             | -             |
+| `yii migrate`                 | Run manually    | On Startup    | On Startup    | Run manually  |
+| Build in DB                   | ✓               | ✓             | ✓             | -             |
+| Data Persistence              | Change manually | ⚠️ Ephemeral  | ⚠️ Ephemeral  | n/a           |
+| DB port exposed to localhost  | 23306           | n/a           | 33306         | n/a           |
+| Create default BackofficeUser | Run manually    | -             | On Startup    | -             |
+| Initialize example data       | Run manually    | -             | On Startup    | -             |
+| `rm -rf /var/lib/apt/lists/*` | -               | ✓             | -             | ✓             |
+| Port for MailDev              | n/a             | n/a           | 1080          | n/a           |
+| Port for frontpage app        | 20080           | n/a           | 30080         | 40080         |
+| Port for backoffice app       | 20081           | n/a           | 30081         | 40081         |
+| Port for api app              | 20082           | n/a           | 30082         | 40082         |
 
 ### Mount source code
 
