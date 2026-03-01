@@ -127,7 +127,7 @@ use `/environments/stage`.
 | `yii migrate`                 | Run manually    | On Startup    | On Startup    | Run manually  |
 | Build in DB                   | ✓               | ✓             | ✓             | -             |
 | Data Persistence              | Change manually | ⚠️ Ephemeral  | ⚠️ Ephemeral  | n/a           |
-| DB port exposed to localhost  | 23306           | n/a           | 33306         | n/a           |
+| DB port exposed to localhost  | 23306           | -             | 33306         | n/a           |
 | Create default BackofficeUser | Run manually    | -             | On Startup    | -             |
 | Initialize example data       | Run manually    | -             | On Startup    | -             |
 | `rm -rf /var/lib/apt/lists/*` | -               | ✓             | -             | ✓             |
