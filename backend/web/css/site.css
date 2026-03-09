@@ -65,13 +65,14 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
+.nav li > form > button.logout,
+.navbar form > button.logout {
     padding-top: 7px;
     color: rgba(255, 255, 255, 0.5);
 }
-
 @media(max-width:767px) {
-    .nav li > form > button.logout {
+    .nav li > form > button.logout,
+    .navbar form > button.logout {
         display:block;
         text-align: left;
         width: 100%;
@@ -143,21 +144,6 @@ a.desc:after {
 .field-error,
 .has-error {
     margin-bottom: 1.25rem !important;
-}
-
-/* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding-top: 7px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 0;
-    }
 }
 
 /* Fix anchor links offset for fixed navbar */

@@ -147,13 +147,13 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
+.navbar form > button.logout {
     padding-top: 7px;
     color: rgba(255, 255, 255, 0.5);
 }
 
 @media(max-width:767px) {
-    .nav li > form > button.logout {
+    .navbar form > button.logout {
         display:block;
         text-align: left;
         width: 100%;
